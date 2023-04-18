@@ -1,17 +1,14 @@
 import { Heading, SectionList, Text, VStack, useToast } from "native-base";
 import { ScreenHeader } from "@components/ScreenHeader/ScreenHeader";
 import { HistoryCard } from "@components/HistoryCard/HistoryCard";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { api } from "@services/api";
 import { AppError } from "@utils/AppError";
 import { useFocusEffect } from "@react-navigation/native";
-interface IExercise {
-  title: string;
-  data: string[];
-}
+import { HistoryByDayDTO } from "@dtos/HistoryByDayDTO";
 
 export const History = () => {
-  const [exercises, setExercises] = useState<IExercise[]>([]);
+  const [exercises, setExercises] = useState<HistoryByDayDTO[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const toast = useToast();
 
@@ -48,8 +45,8 @@ export const History = () => {
       <SectionList
         px="6"
         sections={exercises}
-        keyExtractor={(item) => item}
-        renderItem={() => <HistoryCard />}
+        keyExtractor={(item) => item.id}
+        renderItem={({item}) => <HistoryCard data={item} />}
         renderSectionHeader={({ section }) => (
           <Heading
             color={"gray.200"}

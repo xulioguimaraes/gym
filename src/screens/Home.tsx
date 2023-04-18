@@ -17,7 +17,7 @@ import { AppNavigatorRouterProps } from "@routes/app.routes";
 import { AppError } from "@utils/AppError";
 import { api } from "@services/api";
 import { ExercisesDTO } from "@dtos/ExerciseDTO";
-import { AxiosResponse } from "axios";
+
 import { Loading } from "@components/Loading";
 
 export const Home = () => {
